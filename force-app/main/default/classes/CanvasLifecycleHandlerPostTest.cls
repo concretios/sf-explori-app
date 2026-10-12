@@ -5,163 +5,157 @@
  * @author      : Mayank Singh
  */
 @IsTest
-public class CanvasLifecycleHandlerPostTest {
+private class CanvasLifecycleHandlerPostTest {
     // Well-formed Account Id built from the key prefix so it is not hardcoded.
     private static final String ABSENT_ACCOUNT_ID =
         Account.SObjectType.getDescribe(SObjectDescribeOptions.DEFERRED).getKeyPrefix()
             + '0'.repeat(12) + 'AAA';
 
+    private static final String NO_ACCESS_MESSAGE = 'Sales Intelligence can only open on an Account you can access.';
+    private static final String NO_CONTEXT_MESSAGE = 'Sales Intelligence canvas context is unavailable.';
+
+    // Calls onRender with the given parameters and asserts the exact no-access exception.
+    private static void assertBlocked(String paramsJson, String reason) {
+        Canvas.RenderContext mock = Canvas.Test.mockRenderContext(null, null);
+        mock.getEnvironmentContext().setParametersAsJSON(paramsJson);
+
+        Test.startTest();
+        try {
+            new CanvasLifecycleHandlerPost().onRender(mock);
+            Assert.fail('Expected CanvasRenderException');
+        } catch (Canvas.CanvasRenderException e) {
+            Assert.areEqual(NO_ACCESS_MESSAGE, e.getMessage(), reason);
+        }
+        Test.stopTest();
+    }
+
     @IsTest
     static void onRenderRecordNotAccountThrows() {
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            Canvas.CanvasLifecycleHandler handler = new CanvasLifecycleHandlerPost();
-            Canvas.RenderContext mock = Canvas.Test.mockRenderContext(null, null);
-            // A User Id (005) is a valid Id but not an Account.
-            mock.getEnvironmentContext().setParametersAsJSON(
-                JSON.serialize(new Map<String, Object>{ 'accountId' => UserInfo.getUserId() })
-            );
-
-            Boolean thrown = false;
-            Test.startTest();
-            try {
-                Canvas.Test.testCanvasLifecycle(handler, mock);
-            } catch (System.CanvasException e) {
-                thrown = true;
-            }
-            Test.stopTest();
-            System.assertEquals(true, thrown, 'A non-Account record must block rendering');
-        }
+        // A User Id (005) is a valid Id but not an Account.
+        assertBlocked(
+            JSON.serialize(new Map<String, Object>{ 'accountId' => UserInfo.getUserId() }),
+            'A non-Account record must block rendering'
+        );
     }
 
     @IsTest
     static void onRenderAccountNotVisibleThrows() {
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            Canvas.CanvasLifecycleHandler handler = new CanvasLifecycleHandlerPost();
-            Canvas.RenderContext mock = Canvas.Test.mockRenderContext(null, null);
-            // Well-formed Account Id that does not exist => USER_MODE query returns nothing.
-            mock.getEnvironmentContext().setParametersAsJSON(
-                JSON.serialize(new Map<String, Object>{ 'accountId' => ABSENT_ACCOUNT_ID })
-            );
-
-            Boolean thrown = false;
-            Test.startTest();
-            try {
-                Canvas.Test.testCanvasLifecycle(handler, mock);
-            } catch (System.CanvasException e) {
-                thrown = true;
-            }
-            Test.stopTest();
-            System.assertEquals(true, thrown, 'An inaccessible Account must block rendering');
-        }
+        // Well-formed Account Id that does not exist => USER_MODE query returns nothing.
+        assertBlocked(
+            JSON.serialize(new Map<String, Object>{ 'accountId' => ABSENT_ACCOUNT_ID }),
+            'An inaccessible Account must block rendering'
+        );
     }
 
     @IsTest
     static void onRenderHappyPathSendsOnlyAccountName() {
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            Account acct = new Account(Name = 'Acme Canvas Co');
-            insert acct;
+        Account acct = new Account(Name = 'Acme Canvas Co');
+        insert acct;
 
-            Canvas.CanvasLifecycleHandler handler = new CanvasLifecycleHandlerPost();
-            Canvas.RenderContext mock = Canvas.Test.mockRenderContext(null, null);
-            // Include extra keys to prove the handler rebuilds the payload rather than appending.
-            mock.getEnvironmentContext().setParametersAsJSON(
-                JSON.serialize(new Map<String, Object>{
-                    'accountId' => acct.Id,
-                    'recordId' => acct.Id,
-                    'sessionToken' => 'should-be-dropped'
-                })
-            );
+        Canvas.CanvasLifecycleHandler handler = new CanvasLifecycleHandlerPost();
+        Canvas.RenderContext mock = Canvas.Test.mockRenderContext(null, null);
+        // Include extra keys to prove the handler rebuilds the payload rather than appending.
+        mock.getEnvironmentContext().setParametersAsJSON(
+            JSON.serialize(new Map<String, Object>{
+                'accountId' => acct.Id,
+                'recordId' => acct.Id,
+                'sessionToken' => 'should-be-dropped'
+            })
+        );
 
-            Test.startTest();
-            Canvas.Test.testCanvasLifecycle(handler, mock);
-            Test.stopTest();
+        Test.startTest();
+        Canvas.Test.testCanvasLifecycle(handler, mock);
+        Test.stopTest();
 
-            Map<String, Object> sent = (Map<String, Object>) JSON.deserializeUntyped(
-                mock.getEnvironmentContext().getParametersAsJSON()
-            );
+        Map<String, Object> sent = (Map<String, Object>) JSON.deserializeUntyped(
+            mock.getEnvironmentContext().getParametersAsJSON()
+        );
 
-            System.assertEquals(1, sent.size(), 'Exactly one parameter must be sent: ' + sent.keySet());
-            System.assertEquals(true, sent.containsKey('accountName'), 'accountName must be present');
-            System.assertEquals('Acme Canvas Co', (String) sent.get('accountName'), 'Account Name should be the resolved Account');
+        Assert.areEqual(1, sent.size(), 'Exactly one parameter must be sent: ' + sent.keySet());
+        Assert.isTrue(sent.containsKey('accountName'), 'accountName must be present');
+        Assert.areEqual('Acme Canvas Co', (String) sent.get('accountName'), 'Account Name should be the resolved Account');
 
-            System.assertEquals(false, sent.containsKey('shareId'), 'shareId must not be present');
-            System.assertEquals(false, sent.containsKey('productId'), 'productId must not be present');
-            System.assertEquals(false, sent.containsKey('accountId'), 'accountId must not be present');
-            System.assertEquals(false, sent.containsKey('recordId'), 'recordId must not be forwarded');
-            System.assertEquals(false, sent.containsKey('sessionToken'), 'Unexpected incoming keys must be dropped');
-        }
+        Assert.isFalse(sent.containsKey('shareId'), 'shareId must not be present');
+        Assert.isFalse(sent.containsKey('productId'), 'productId must not be present');
+        Assert.isFalse(sent.containsKey('accountId'), 'accountId must not be present');
+        Assert.isFalse(sent.containsKey('recordId'), 'recordId must not be forwarded');
+        Assert.isFalse(sent.containsKey('sessionToken'), 'Unexpected incoming keys must be dropped');
     }
 
     @IsTest
     static void excludeContextTypesReturnsEmptySet() {
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            // The handler keeps all context types in the signed request.
-            Set<Canvas.ContextTypeEnum> excluded = new CanvasLifecycleHandlerPost().excludeContextTypes();
-            System.assertNotEquals(null, excluded, 'excludeContextTypes must not return null');
-            System.assertEquals(true, excluded.isEmpty(), 'No context types should be excluded');
-        }
+        // The handler keeps all context types in the signed request.
+        Set<Canvas.ContextTypeEnum> excluded = new CanvasLifecycleHandlerPost().excludeContextTypes();
+        Assert.areNotEqual(null, excluded, 'excludeContextTypes must not return null');
+        Assert.isTrue(excluded.isEmpty(), 'No context types should be excluded');
     }
 
     @IsTest
     static void onRenderNullContextThrows() {
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            // Direct invocation with a null RenderContext exercises the null-context guard.
-            Boolean thrown = false;
-            Test.startTest();
-            try {
-                new CanvasLifecycleHandlerPost().onRender(null);
-            } catch (Exception e) {
-                thrown = true;
-                System.assertEquals(
-                    true,
-                    e.getMessage().contains('unavailable'),
-                    'Null context should report an unavailable canvas context: ' + e.getMessage()
-                );
-            }
-            Test.stopTest();
-            System.assertEquals(true, thrown, 'A null RenderContext must block rendering');
+        // Direct invocation with a null RenderContext exercises the null-context guard.
+        Test.startTest();
+        try {
+            new CanvasLifecycleHandlerPost().onRender(null);
+            Assert.fail('Expected CanvasRenderException');
+        } catch (Canvas.CanvasRenderException e) {
+            Assert.areEqual(
+                NO_CONTEXT_MESSAGE,
+                e.getMessage(),
+                'Null context should report an unavailable canvas context: ' + e.getMessage()
+            );
         }
+        Test.stopTest();
     }
 
     @IsTest
     static void onRenderBlankParamsThrows() {
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            // No record id is supplied => no visible Account.
-            Canvas.CanvasLifecycleHandler handler = new CanvasLifecycleHandlerPost();
-            Canvas.RenderContext mock = Canvas.Test.mockRenderContext(null, null);
-            mock.getEnvironmentContext().setParametersAsJSON('{}');
-
-            Boolean thrown = false;
-            Test.startTest();
-            try {
-                Canvas.Test.testCanvasLifecycle(handler, mock);
-            } catch (System.CanvasException e) {
-                thrown = true;
-            }
-            Test.stopTest();
-            System.assertEquals(true, thrown, 'Blank incoming parameters must block rendering');
-        }
+        // No record id is supplied => no visible Account.
+        assertBlocked('{}', 'Blank incoming parameters must block rendering');
     }
 
     @IsTest
     static void onRenderMalformedAccountIdThrows() {
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            // A non-blank but invalid Id value is treated as an inaccessible Account.
-            Canvas.CanvasLifecycleHandler handler = new CanvasLifecycleHandlerPost();
-            Canvas.RenderContext mock = Canvas.Test.mockRenderContext(null, null);
-            mock.getEnvironmentContext().setParametersAsJSON(
-                JSON.serialize(new Map<String, Object>{ 'accountId' => 'not-a-real-id' })
-            );
+        // A non-blank but invalid Id value is treated as an inaccessible Account.
+        assertBlocked(
+            JSON.serialize(new Map<String, Object>{ 'accountId' => 'not-a-real-id' }),
+            'A malformed Account Id must block rendering'
+        );
+    }
 
-            Boolean thrown = false;
-            Test.startTest();
+    @IsTest
+    static void onRenderUserWithoutAccountAccessThrows() {
+        Account acct = new Account(Name = 'Restricted Canvas Co');
+        insert acct;
+
+        Profile minimumAccess = [SELECT Id FROM Profile WHERE Name = 'Minimum Access - Salesforce' LIMIT 1];
+        String uniqueKey = String.valueOf(Math.abs(Crypto.getRandomInteger()));
+        User restricted = new User(
+            ProfileId = minimumAccess.Id,
+            Username = 'canvas.restricted.' + uniqueKey + '@example.com',
+            Alias = 'cnvrst',
+            Email = 'canvas.restricted@example.com',
+            EmailEncodingKey = 'UTF-8',
+            LanguageLocaleKey = 'en_US',
+            LastName = 'Restricted',
+            LocaleSidKey = 'en_US',
+            TimeZoneSidKey = 'America/Los_Angeles'
+        );
+        insert restricted;
+
+        Canvas.RenderContext mock = Canvas.Test.mockRenderContext(null, null);
+        mock.getEnvironmentContext().setParametersAsJSON(
+            JSON.serialize(new Map<String, Object>{ 'accountId' => acct.Id })
+        );
+
+        Test.startTest();
+        System.runAs(restricted) {
             try {
-                Canvas.Test.testCanvasLifecycle(handler, mock);
-            } catch (System.CanvasException e) {
-                thrown = true;
+                new CanvasLifecycleHandlerPost().onRender(mock);
+                Assert.fail('Expected QueryException for a user without Account Read');
+            } catch (System.QueryException e) {
+                Assert.isNotNull(e.getMessage(), 'USER_MODE query should deny Account access');
             }
-            Test.stopTest();
-            System.assertEquals(true, thrown, 'A malformed Account Id must block rendering');
         }
+        Test.stopTest();
     }
 }
