@@ -1,0 +1,3 @@
+<design:component label="Sales Intelligence Canvas">
+    <design:attribute name="displayDensity" label="Display Density" datasource="sidebar,subtab"/>
+</design:component>

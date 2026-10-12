@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AuraDefinitionBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>67.0</apiVersion>
-    <description>Account page host for Explori Sales Intelligence Canvas. Sends the current record Id only.</description>
+    <description>Lightning host that embeds the Sales Intelligence Canvas app for sales users, sending only the current record Id.</description>
 </AuraDefinitionBundle>

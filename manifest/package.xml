@@ -6,31 +6,39 @@
     </types>
     <types>
         <members>*</members>
-        <name>ApexComponent</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexPage</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexTestSuite</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexTrigger</name>
-    </types>
-    <types>
-        <members>*</members>
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
         <members>*</members>
-        <name>LightningComponentBundle</name>
+        <name>ExternalClientApplication</name>
     </types>
     <types>
         <members>*</members>
-        <name>StaticResource</name>
+        <name>ExtlClntAppCanvasSettings</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ExtlClntAppConfigurablePolicies</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ExtlClntAppGlobalOauthSettings</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ExtlClntAppOauthConfigurablePolicies</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ExtlClntAppOauthSecuritySettings</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ExtlClntAppOauthSettings</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>PermissionSet</name>
     </types>
     <version>67.0</version>
 </Package>

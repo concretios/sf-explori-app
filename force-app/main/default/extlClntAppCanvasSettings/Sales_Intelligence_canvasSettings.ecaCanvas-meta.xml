@@ -3,8 +3,8 @@
     <accessMethod>Post</accessMethod>
     <canvasLocationOptions>Aura</canvasLocationOptions>
     <canvasUrl>https://si.staging.explori.com/</canvasUrl>
-    <externalClientApplication>Explori_Sales_Intelligence</externalClientApplication>
-    <label>Explori_Sales_Intelligence_canvasSettings</label>
-    <lifeCycleHandler>ExploriCanvasLifecycleHandlerPost</lifeCycleHandler>
+    <externalClientApplication>Sales_Intelligence</externalClientApplication>
+    <label>Sales Intelligence Settings</label>
+    <lifeCycleHandler>CanvasLifecycleHandlerPost</lifeCycleHandler>
     <samlInitiationMethod>None</samlInitiationMethod>
 </ExtlClntAppCanvasSettings>

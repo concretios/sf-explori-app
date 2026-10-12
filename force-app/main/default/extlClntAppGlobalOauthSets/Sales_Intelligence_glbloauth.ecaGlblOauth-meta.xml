@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtlClntAppGlobalOauthSettings xmlns="http://soap.sforce.com/2006/04/metadata">
     <callbackUrl>https://login.salesforce.com/services/oauth2/success</callbackUrl>
-    <consumerKey>3MVG9eXciSTTfrSqJrgQL6DQks17h4rqS1_ZiWW2z_MjY.SvNgHPEHRbWMg1RNytoeVEA4fEPQBMSl2qgIdEz</consumerKey>
-    <externalClientApplication>Explori_Sales_Intelligence</externalClientApplication>
+    <!-- TEMPORARY: consumer key from the explori scratch org, kept for testing. Remove before building a package version for AppExchange submission. Never commit the consumer secret. -->
+    <consumerKey>3MVG9eDl6e4OpNY3UBEmpVA3MFX1hX7zREVAmToxEIe0dTklO.h0OrjpMk2Dv8FnUaM441ZJrTyX1G14i1D.E</consumerKey>
+    <externalClientApplication>Sales_Intelligence</externalClientApplication>
     <isClientCredentialsFlowEnabled>false</isClientCredentialsFlowEnabled>
     <isCodeCredFlowEnabled>false</isCodeCredFlowEnabled>
     <isCodeCredPostOnly>false</isCodeCredPostOnly>
@@ -17,7 +18,7 @@
     <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
     <isSecretRequiredForTokenExchange>true</isSecretRequiredForTokenExchange>
     <isTokenExchangeEnabled>false</isTokenExchangeEnabled>
-    <label>Explori_Sales_Intelligence_glbloauth</label>
+    <label>Sales Intelligence Global OAuth Settings</label>
     <shouldRotateConsumerKey>false</shouldRotateConsumerKey>
     <shouldRotateConsumerSecret>false</shouldRotateConsumerSecret>
 </ExtlClntAppGlobalOauthSettings>

@@ -1,8 +1,8 @@
 <!--
-  @description       : 
+  @description       : Lightning host that embeds the Sales Intelligence Canvas app on a record or Home page, passing only the current record Id.
   @author            : Mayank Singh
   @group             : 
-  @last modified on  : 09-30-2026
+  @last modified on  : 10-07-2026
   @last modified by  : Mayank Singh
 -->
 <aura:component
@@ -15,9 +15,9 @@
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 
-    <div class="explori-canvas-host slds-is-relative">
+    <div class="slds-is-relative">
         <force:canvasApp
-            developerName="Explori_Sales_Intelligence"
+            developerName="Sales_Intelligence"
             width="100%"
             height="640px"
             border="false"

@@ -1,0 +1,3 @@
+<aura:documentation>
+    <aura:description>Lightning host that embeds the Sales Intelligence Canvas app for sales users and sends only the current record Id, leaving the Canvas lifecycle handler to add the Share ID and Product ID.</aura:description>
+</aura:documentation>

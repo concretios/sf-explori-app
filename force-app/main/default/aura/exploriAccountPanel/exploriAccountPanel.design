@@ -1,6 +1,0 @@
-<design:component label="Explori Account Intelligence">
-    <sfdc:objects>
-        <sfdc:object>Account</sfdc:object>
-    </sfdc:objects>
-    <design:attribute name="displayDensity" label="Display Density" datasource="sidebar,subtab"/>
-</design:component>
