@@ -1,6 +1,8 @@
-# Explori Sales Intelligence
+# Explori Sales RevNavigator
 
-Salesforce package that embeds Explori Sales Intelligence on Account with Canvas Signed Request (POST). Immediately before Salesforce signs the request, Apex reads the Account `WITH USER_MODE` and sends `accountId` and `accountName`. Organization, user and record context already travel in the signed request.
+Brings Explori's RevNavigator dashboard inside Salesforce.
+
+Salesforce package that embeds Explori Sales RevNavigator on Account with Canvas Signed Request (POST). Immediately before Salesforce signs the request, Apex reads the Account `WITH USER_MODE` and sends `accountId` and `accountName`. Organization, user and record context already travel in the signed request.
 
 This is source for a future **2GP managed package**. Namespace is not registered yet. Do not hardcode `ns__` prefixes.
 
@@ -8,8 +10,8 @@ This is source for a future **2GP managed package**. Namespace is not registered
 
 | Area | Source | Role |
 | --- | --- | --- |
-| ECA / Canvas | `Sales_Intelligence` | Canvas app, access method **Post**, URL path only |
-| Account host | Aura `SalesIntelligenceCanvas` (App Builder label **Sales Intelligence Canvas**) | Passes `{ recordId }` only |
+| ECA / Canvas | `Explori_Sales_RevNavigator` | Canvas app, access method **Post**, URL path only |
+| Account host | Aura `ExploriSalesRevNavigator` (App Builder label **Explori Sales RevNavigator**) | Passes `{ recordId }` only |
 | Lifecycle | `CanvasLifecycleHandlerPost` | Sends `accountId` and `accountName`, after a `WITH USER_MODE` Account read |
 | Selector | `SObjectSelector` | Single home for the package's SOQL, grouped by object. Every query runs `WITH USER_MODE` |
 
@@ -38,15 +40,15 @@ Do not put `accountName` or any other parameter on that URL.
 ```
 force-app/main/default/
   classes/                            CanvasLifecycleHandlerPost, SObjectSelector + tests
-  aura/SalesIntelligenceCanvas/       Canvas host
+  aura/ExploriSalesRevNavigator/      Canvas host
   permissionsets/                     Explori_User
-  externalClientApps/                 Sales_Intelligence ECA
-  extlClntAppCanvasSettings/          ECA Canvas settings
-  extlClntAppGlobalOauthSets/         ECA global OAuth settings
-  extlClntAppOauthSettings/           ECA OAuth settings
-  extlClntAppOauthSecuritySettings/   ECA OAuth security settings
-  extlClntAppOauthPolicies/           ECA OAuth policies
-  extlClntAppPolicies/                ECA policies
+  externalClientApps/                 Explori_Sales_RevNavigator.eca-meta.xml (ECA)
+  extlClntAppCanvasSettings/          Explori_Sales_RevNavigator_canvasSettings.ecaCanvas-meta.xml
+  extlClntAppGlobalOauthSets/         Explori_Sales_RevNavigator_glbloauth.ecaGlblOauth-meta.xml
+  extlClntAppOauthSettings/           Explori_Sales_RevNavigator_oauth.ecaOauth-meta.xml
+  extlClntAppOauthSecuritySettings/   Explori_Sales_RevNavigator_oauthSecurity.ecaOauthSecurity-meta.xml
+  extlClntAppOauthPolicies/           Explori_Sales_RevNavigator_oauthPlcy.ecaOauthPlcy-meta.xml
+  extlClntAppPolicies/                Explori_Sales_RevNavigator_plcy.ecaPlcy-meta.xml
 config/                               Scratch org definition
 manifest/package.xml                  Retrieve manifest for the full package
 sfdx-project.json
@@ -57,9 +59,9 @@ sfdx-project.json
 1. Authorize the org: `sf org login web --alias explori-dev`
 2. Deploy: `sf project deploy start --target-org explori-dev`
 3. Assign `Explori_User` to people who open Account
-4. Add **Sales Intelligence Canvas** to the Account Lightning page (App Builder, Account only)
+4. Add **Explori Sales RevNavigator** to the Account Lightning page (App Builder, Account only)
 
-When a package namespace exists, set `namespacePrefix` on `force:canvasApp` in `SalesIntelligenceCanvas.cmp`. Leave it unset until then.
+When a package namespace exists, set `namespacePrefix` on `force:canvasApp` in `ExploriSalesRevNavigator.cmp`. Leave it unset until then.
 
 ## Common commands
 

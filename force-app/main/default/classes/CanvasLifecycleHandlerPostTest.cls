@@ -11,8 +11,8 @@ private class CanvasLifecycleHandlerPostTest {
         Account.SObjectType.getDescribe(SObjectDescribeOptions.DEFERRED).getKeyPrefix()
             + '0'.repeat(12) + 'AAA';
 
-    private static final String NO_ACCESS_MESSAGE = 'Sales Intelligence can only open on an Account you can access.';
-    private static final String NO_CONTEXT_MESSAGE = 'Sales Intelligence canvas context is unavailable.';
+    private static final String NO_ACCESS_MESSAGE = 'Explori Sales RevNavigator can only open on an Account you can access.';
+    private static final String NO_CONTEXT_MESSAGE = 'Explori Sales RevNavigator context is unavailable.';
 
     // The running test user, who can read the Accounts the test inserts.
     private static User currentUser() {

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtlClntAppOauthConfigurablePolicies xmlns="http://soap.sforce.com/2006/04/metadata">
     <commaSeparatedPermissionSet>Explori_User</commaSeparatedPermissionSet>
-    <externalClientApplication>Sales_Intelligence</externalClientApplication>
+    <externalClientApplication>Explori_Sales_RevNavigator</externalClientApplication>
     <ipRelaxationPolicyType>Enforce</ipRelaxationPolicyType>
     <isClientCredentialsFlowEnabled>false</isClientCredentialsFlowEnabled>
     <isGuestCodeCredFlowEnabled>false</isGuestCodeCredFlowEnabled>
     <isTokenExchangeFlowEnabled>false</isTokenExchangeFlowEnabled>
-    <label>Sales Intelligence OAuth Policy</label>
+    <label>Explori Sales RevNavigator OAuth Policy</label>
     <permittedUsersPolicyType>AdminApprovedPreAuthorized</permittedUsersPolicyType>
     <refreshTokenPolicyType>Zero</refreshTokenPolicyType>
     <refreshTokenValidityPeriod>0</refreshTokenValidityPeriod>
