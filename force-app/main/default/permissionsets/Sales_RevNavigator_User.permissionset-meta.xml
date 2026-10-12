@@ -4,7 +4,7 @@
         <apexClass>CanvasLifecycleHandlerPost</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <description>Assign to Explori Sales Intelligence users who open the Canvas app; grants the Canvas lifecycle handler Apex class only, with no setup access and no object permissions.</description>
+    <description>Assign to Explori Sales RevNavigator users who open the Canvas app; grants the Canvas lifecycle handler Apex class only, with no setup access and no object permissions.</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Explori User</label>
 </PermissionSet>

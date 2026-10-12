@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExternalClientApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <contactEmail>singh.mayank@concret.io</contactEmail>
+    <description>Brings Explori's RevNavigator dashboard inside Salesforce.</description>
     <distributionState>Local</distributionState>
     <isProtected>false</isProtected>
-    <label>Explori Sales Intelligence</label>
-    <orgScopedExternalApp>00DAe00000FLG2k:Sales_Intelligence</orgScopedExternalApp>
+    <label>Explori Sales RevNavigator</label>
+    <orgScopedExternalApp>00DAe00000FLG2k:Sales_RevNavigator</orgScopedExternalApp>
 </ExternalClientApplication>

@@ -1,5 +1,5 @@
 /**
- * @description : Canvas lifecycle handler for Sales Intelligence. Runs immediately before
+ * @description : Canvas lifecycle handler for Explori Sales RevNavigator. Runs immediately before
  *                Salesforce signs the Canvas request: verifies the running user can access
  *                the Account in USER_MODE, then sends accountId and accountName. Organization,
  *                user and record context already travel in the signed request, and the
@@ -31,7 +31,7 @@ global with sharing class CanvasLifecycleHandlerPost implements Canvas.CanvasLif
      */
     global void onRender(Canvas.RenderContext renderContext) {
         if (renderContext == null || renderContext.getEnvironmentContext() == null) {
-            throw new Canvas.CanvasRenderException('Sales Intelligence canvas context is unavailable.');
+            throw new Canvas.CanvasRenderException('Explori Sales RevNavigator context is unavailable.');
         }
         Canvas.EnvironmentContext env = renderContext.getEnvironmentContext();
 
@@ -45,10 +45,10 @@ global with sharing class CanvasLifecycleHandlerPost implements Canvas.CanvasLif
             : (incoming.containsKey('recordId') ? String.valueOf(incoming.get('recordId')) : null);
         Account account = findVisibleAccount(requestedId);
         if (account == null) {
-            throw new Canvas.CanvasRenderException('Sales Intelligence can only open on an Account you can access.');
+            throw new Canvas.CanvasRenderException('Explori Sales RevNavigator can only open on an Account you can access.');
         }
 
-        // Send accountId and accountName; the gateway derives everything else from the verified Org Id.
+        /* Send accountId and accountName; the gateway derives everything else from the verified Org Id. */
         env.setParametersAsJSON(JSON.serialize(new Map<String, Object>{
             'accountId' => String.valueOf(account.Id),
             'accountName' => account.Name

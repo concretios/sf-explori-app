@@ -1,5 +1,5 @@
 /**
- * @description : Single home for the SOQL used by the Sales Intelligence package, grouped by
+ * @description : Single home for the SOQL used by the Explori Sales RevNavigator package, grouped by
  *                object. Every query must run WITH USER_MODE so the running user's object,
  *                field and record access is enforced. Callers handle empty results; access
  *                failures surface as System.QueryException.
