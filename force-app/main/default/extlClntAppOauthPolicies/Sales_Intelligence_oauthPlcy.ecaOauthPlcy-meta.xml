@@ -6,7 +6,7 @@
     <isClientCredentialsFlowEnabled>false</isClientCredentialsFlowEnabled>
     <isGuestCodeCredFlowEnabled>false</isGuestCodeCredFlowEnabled>
     <isTokenExchangeFlowEnabled>false</isTokenExchangeFlowEnabled>
-    <label>Sales_Intelligence_oauthPlcy</label>
+    <label>Sales Intelligence OAuth Policy</label>
     <permittedUsersPolicyType>AdminApprovedPreAuthorized</permittedUsersPolicyType>
     <refreshTokenPolicyType>Zero</refreshTokenPolicyType>
     <refreshTokenValidityPeriod>0</refreshTokenValidityPeriod>

@@ -1,7 +1,7 @@
 /**
  * @description : Canvas lifecycle handler for Sales Intelligence. Runs immediately before
  *                Salesforce signs the Canvas request: verifies the running user can access
- *                the Account in USER_MODE, then sends only the Account name. Organization,
+ *                the Account in USER_MODE, then sends accountId and accountName. Organization,
  *                user and record context already travel in the signed request, and the
  *                gateway derives the short-lived share token from the verified organization Id.
  * @author      : Mayank Singh
@@ -9,9 +9,11 @@
 @SuppressWarnings('PMD.AvoidGlobalModifier')
 global with sharing class CanvasLifecycleHandlerPost implements Canvas.CanvasLifecycleHandler {
 
-    // 'global' is required: Canvas.CanvasLifecycleHandler is a global interface in the Canvas
-    // system namespace (a public impl won't compile), and the managed package needs the
-    // platform to invoke this handler across namespaces.
+    /*
+     * 'global' is required: Canvas.CanvasLifecycleHandler is a global interface in the Canvas
+     * system namespace (a public impl won't compile), and the managed package needs the
+     * platform to invoke this handler across namespaces.
+     */
 
     /**
      * @description Canvas lifecycle callback listing the context types to exclude from the
@@ -24,7 +26,7 @@ global with sharing class CanvasLifecycleHandlerPost implements Canvas.CanvasLif
 
     /**
      * @description Runs before Salesforce signs the Canvas request. Verifies the running user
-     *              can access the Account in USER_MODE, then sends only the Account name.
+     *              can access the Account in USER_MODE, then sends accountId and accountName.
      * @param renderContext The Canvas render context supplied by the platform.
      */
     global void onRender(Canvas.RenderContext renderContext) {
@@ -34,8 +36,10 @@ global with sharing class CanvasLifecycleHandlerPost implements Canvas.CanvasLif
         Canvas.EnvironmentContext env = renderContext.getEnvironmentContext();
 
         Map<String, Object> incoming = readExistingParameters(env.getParametersAsJSON());
-        // Prefer the accountId key, fall back to recordId. containsKey keeps an absent
-        // key as null rather than the literal string 'null'.
+        /*
+         * Prefer the accountId key, fall back to recordId. containsKey keeps an absent
+         * key as null rather than the literal string 'null'.
+         */
         String requestedId = incoming.containsKey('accountId')
             ? String.valueOf(incoming.get('accountId'))
             : (incoming.containsKey('recordId') ? String.valueOf(incoming.get('recordId')) : null);
@@ -44,8 +48,9 @@ global with sharing class CanvasLifecycleHandlerPost implements Canvas.CanvasLif
             throw new Canvas.CanvasRenderException('Sales Intelligence can only open on an Account you can access.');
         }
 
-        // Send only the Account name; the gateway derives everything else from the verified Org Id.
+        // Send accountId and accountName; the gateway derives everything else from the verified Org Id.
         env.setParametersAsJSON(JSON.serialize(new Map<String, Object>{
+            'accountId' => String.valueOf(account.Id),
             'accountName' => account.Name
         }));
     }
@@ -68,7 +73,7 @@ global with sharing class CanvasLifecycleHandlerPost implements Canvas.CanvasLif
             return null;
         }
         Id recId = Id.valueOf(accountId);
-        List<Account> rows = [SELECT Id, Name FROM Account WHERE Id = :recId WITH USER_MODE LIMIT 1];
+        List<Account> rows = SObjectSelector.selectAccountById(recId);
         return rows.isEmpty() ? null : rows[0];
     }
 }

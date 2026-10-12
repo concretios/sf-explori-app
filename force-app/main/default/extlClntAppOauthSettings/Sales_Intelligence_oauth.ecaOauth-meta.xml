@@ -3,5 +3,5 @@
     <commaSeparatedOauthScopes>Basic</commaSeparatedOauthScopes>
     <externalClientApplication>Sales_Intelligence</externalClientApplication>
     <isFirstPartyAppEnabled>false</isFirstPartyAppEnabled>
-    <label>Sales_Intelligence_oauth</label>
+    <label>Sales Intelligence OAuth Settings</label>
 </ExtlClntAppOauthSettings>

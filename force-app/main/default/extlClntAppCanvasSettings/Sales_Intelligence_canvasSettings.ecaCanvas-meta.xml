@@ -4,7 +4,7 @@
     <canvasLocationOptions>Aura</canvasLocationOptions>
     <canvasUrl>https://si.staging.explori.com/</canvasUrl>
     <externalClientApplication>Sales_Intelligence</externalClientApplication>
-    <label>Sales_Intelligence_canvasSettings</label>
+    <label>Sales Intelligence Settings</label>
     <lifeCycleHandler>CanvasLifecycleHandlerPost</lifeCycleHandler>
     <samlInitiationMethod>None</samlInitiationMethod>
 </ExtlClntAppCanvasSettings>

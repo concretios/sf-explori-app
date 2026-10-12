@@ -4,6 +4,6 @@
     <isCanvasPluginEnabled>true</isCanvasPluginEnabled>
     <isEnabled>true</isEnabled>
     <isOauthPluginEnabled>true</isOauthPluginEnabled>
-    <label>Sales_Intelligence_plcy</label>
+    <label>Sales Intelligence Policy</label>
     <startPage>None</startPage>
 </ExtlClntAppConfigurablePolicies>
