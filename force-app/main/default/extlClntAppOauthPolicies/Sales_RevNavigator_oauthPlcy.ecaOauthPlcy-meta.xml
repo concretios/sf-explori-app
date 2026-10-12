@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtlClntAppOauthConfigurablePolicies xmlns="http://soap.sforce.com/2006/04/metadata">
-    <commaSeparatedPermissionSet>Explori_User</commaSeparatedPermissionSet>
-    <externalClientApplication>Explori_Sales_RevNavigator</externalClientApplication>
+    <commaSeparatedPermissionSet>Sales_RevNavigator_User</commaSeparatedPermissionSet>
+    <externalClientApplication>Sales_RevNavigator</externalClientApplication>
     <ipRelaxationPolicyType>Enforce</ipRelaxationPolicyType>
     <isClientCredentialsFlowEnabled>false</isClientCredentialsFlowEnabled>
     <isGuestCodeCredFlowEnabled>false</isGuestCodeCredFlowEnabled>

@@ -1,5 +1,5 @@
 /**
- * @description       : Client controller for ExploriSalesRevNavigator; sends only the current record Id to the Canvas app.
+ * @description       : Client controller for the Explori Sales RevNavigator Canvas host; sends only the current record Id to the Canvas app.
  * @author            : Mayank Singh
  * @group             : 
  * @last modified on  : 10-12-2026

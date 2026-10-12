@@ -10,8 +10,8 @@ This is source for a future **2GP managed package**. Namespace is not registered
 
 | Area | Source | Role |
 | --- | --- | --- |
-| ECA / Canvas | `Explori_Sales_RevNavigator` | Canvas app, access method **Post**, URL path only |
-| Account host | Aura `ExploriSalesRevNavigator` (App Builder label **Explori Sales RevNavigator**) | Passes `{ recordId }` only |
+| ECA / Canvas | `Sales_RevNavigator` | Canvas app, access method **Post**, URL path only |
+| Account host | Aura `SalesRevNavigator` (App Builder label **Explori Sales RevNavigator**) | Passes `{ recordId }` only |
 | Lifecycle | `CanvasLifecycleHandlerPost` | Sends `accountId` and `accountName`, after a `WITH USER_MODE` Account read |
 | Selector | `SObjectSelector` | Single home for the package's SOQL, grouped by object. Every query runs `WITH USER_MODE` |
 
@@ -25,9 +25,9 @@ Do not put `accountName` or any other parameter on that URL.
 
 | Metadata | Assign to | Grants |
 | --- | --- | --- |
-| Permission set `Explori_User` | Sales users | Apex class access to `CanvasLifecycleHandlerPost` only. No object permissions. Also listed on the ECA |
+| Permission set `Sales_RevNavigator_User` (label **Explori User**) | Sales users | Apex class access to `CanvasLifecycleHandlerPost` only. No object permissions. Also listed on the ECA |
 
-`Explori_User` grants no object permissions. Account access comes from the user's own profile or other permission sets, and the handler enforces it with a `WITH USER_MODE` query. A user who cannot read the Account cannot open the Canvas app.
+`Sales_RevNavigator_User` grants no object permissions. Account access comes from the user's own profile or other permission sets, and the handler enforces it with a `WITH USER_MODE` query. A user who cannot read the Account cannot open the Canvas app.
 
 ## Prerequisites
 
@@ -40,15 +40,15 @@ Do not put `accountName` or any other parameter on that URL.
 ```
 force-app/main/default/
   classes/                            CanvasLifecycleHandlerPost, SObjectSelector + tests
-  aura/ExploriSalesRevNavigator/      Canvas host
-  permissionsets/                     Explori_User
-  externalClientApps/                 Explori_Sales_RevNavigator.eca-meta.xml (ECA)
-  extlClntAppCanvasSettings/          Explori_Sales_RevNavigator_canvasSettings.ecaCanvas-meta.xml
-  extlClntAppGlobalOauthSets/         Explori_Sales_RevNavigator_glbloauth.ecaGlblOauth-meta.xml
-  extlClntAppOauthSettings/           Explori_Sales_RevNavigator_oauth.ecaOauth-meta.xml
-  extlClntAppOauthSecuritySettings/   Explori_Sales_RevNavigator_oauthSecurity.ecaOauthSecurity-meta.xml
-  extlClntAppOauthPolicies/           Explori_Sales_RevNavigator_oauthPlcy.ecaOauthPlcy-meta.xml
-  extlClntAppPolicies/                Explori_Sales_RevNavigator_plcy.ecaPlcy-meta.xml
+  aura/SalesRevNavigator/             Canvas host
+  permissionsets/                     Sales_RevNavigator_User
+  externalClientApps/                 Sales_RevNavigator.eca-meta.xml (ECA)
+  extlClntAppCanvasSettings/          Sales_RevNavigator_canvasSettings.ecaCanvas-meta.xml
+  extlClntAppGlobalOauthSets/         Sales_RevNavigator_glbloauth.ecaGlblOauth-meta.xml
+  extlClntAppOauthSettings/           Sales_RevNavigator_oauth.ecaOauth-meta.xml
+  extlClntAppOauthSecuritySettings/   Sales_RevNavigator_oauthSecurity.ecaOauthSecurity-meta.xml
+  extlClntAppOauthPolicies/           Sales_RevNavigator_oauthPlcy.ecaOauthPlcy-meta.xml
+  extlClntAppPolicies/                Sales_RevNavigator_plcy.ecaPlcy-meta.xml
 config/                               Scratch org definition
 manifest/package.xml                  Retrieve manifest for the full package
 sfdx-project.json
@@ -58,10 +58,10 @@ sfdx-project.json
 
 1. Authorize the org: `sf org login web --alias explori-dev`
 2. Deploy: `sf project deploy start --target-org explori-dev`
-3. Assign `Explori_User` to people who open Account
+3. Assign `Sales_RevNavigator_User` to people who open Account
 4. Add **Explori Sales RevNavigator** to the Account Lightning page (App Builder, Account only)
 
-When a package namespace exists, set `namespacePrefix` on `force:canvasApp` in `ExploriSalesRevNavigator.cmp`. Leave it unset until then.
+When a package namespace exists, set `namespacePrefix` on `force:canvasApp` in `SalesRevNavigator.cmp`. Leave it unset until then.
 
 ## Common commands
 

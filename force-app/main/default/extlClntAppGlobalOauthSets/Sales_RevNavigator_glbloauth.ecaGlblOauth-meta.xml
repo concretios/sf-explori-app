@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtlClntAppGlobalOauthSettings xmlns="http://soap.sforce.com/2006/04/metadata">
     <callbackUrl>https://login.salesforce.com/services/oauth2/success</callbackUrl>
-    <!-- TEMPORARY: consumer key from the revnav-scratch scratch org, kept for testing as agreed with the lead (2026-10-12). Remove before building a package version for AppExchange submission. -->
-    <consumerKey>3MVG9xj60O9CjKHohdT2LtC_YZ70xs8aBYnTHIsm7HpVnpRigRZrrKHnsMYnRaNVFCU7UOPQGhMspY7YWpJ_R</consumerKey>
-    <externalClientApplication>Explori_Sales_RevNavigator</externalClientApplication>
+    <!-- TEMPORARY: consumer key from the revnav2-scratch scratch org, kept for testing as agreed with the lead (2026-10-12). Remove before building a package version for AppExchange submission. -->
+    <consumerKey>3MVG9eXciSTTfrSo8QlV480KkXP7LwBBwv5wx5MdTnTBbWGlB6A1j2FepUKx1zRwPn9fGMkTLBSbI2DVhiJln</consumerKey>
+    <externalClientApplication>Sales_RevNavigator</externalClientApplication>
     <isClientCredentialsFlowEnabled>false</isClientCredentialsFlowEnabled>
     <isCodeCredFlowEnabled>false</isCodeCredFlowEnabled>
     <isCodeCredPostOnly>false</isCodeCredPostOnly>

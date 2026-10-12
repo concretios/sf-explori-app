@@ -17,7 +17,7 @@
 
     <div class="slds-is-relative">
         <force:canvasApp
-            developerName="Explori_Sales_RevNavigator"
+            developerName="Sales_RevNavigator"
             width="100%"
             height="640px"
             border="false"

@@ -3,7 +3,7 @@
     <accessMethod>Post</accessMethod>
     <canvasLocationOptions>Aura</canvasLocationOptions>
     <canvasUrl>https://si.staging.explori.com/</canvasUrl>
-    <externalClientApplication>Explori_Sales_RevNavigator</externalClientApplication>
+    <externalClientApplication>Sales_RevNavigator</externalClientApplication>
     <label>Explori Sales RevNavigator Settings</label>
     <lifeCycleHandler>CanvasLifecycleHandlerPost</lifeCycleHandler>
     <samlInitiationMethod>None</samlInitiationMethod>
