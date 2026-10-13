@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
-        <apexClass>CanvasLifecycleHandlerPost</apexClass>
+        <apexClass>SalesRevNavigatorCanvasLifecycleHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <description>Assign to Explori Sales RevNavigator users who open the Canvas app; grants the Canvas lifecycle handler Apex class only, with no setup access and no object permissions.</description>

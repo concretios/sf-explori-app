@@ -1,13 +1,11 @@
 <!--
   @description       : Lightning host that embeds the Explori Sales RevNavigator Canvas app on a record or Home page, passing only the current record Id.
   @author            : Mayank Singh
-  @group             : 
-  @last modified on  : 10-12-2026
+  @group             :
+  @last modified on  : 10-13-2026
   @last modified by  : Mayank Singh
 -->
-<aura:component
-    implements="flexipage:availableForRecordHome,force:hasRecordId"
-    access="global">
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
 
     <aura:attribute name="recordId" type="String"/>
     <aura:attribute name="displayDensity" type="String" default="sidebar" access="global"/>
