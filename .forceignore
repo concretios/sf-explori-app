@@ -10,3 +10,10 @@ package.xml
 
 # Dependencies
 node_modules/
+
+# OAuth secret settings stay in the Dev Hub, never packaged
+**/*.ecaGlblOauth-meta.xml
+# ECA policies are set in each installing org, not packaged
+**/*.ecaOauthSecurity-meta.xml
+**/*.ecaOauthPlcy-meta.xml
+**/*.ecaPlcy-meta.xml
