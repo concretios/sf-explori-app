@@ -10,7 +10,7 @@
     access="global">
 
     <aura:attribute name="recordId" type="String"/>
-    <aura:attribute name="displayDensity" type="String" default="sidebar"/>
+    <aura:attribute name="displayDensity" type="String" default="sidebar" access="global"/>
     <aura:attribute name="canvasParams" type="String" default="{}"/>
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
