@@ -8,7 +8,7 @@
 ({
     doInit: function (component) {
         /*
-         * Send only the record Id. CanvasLifecycleHandlerPost reads the Account WITH USER_MODE
+         * Send only the record Id. SalesRevNavigatorCanvasLifecycleHandler reads the Account WITH USER_MODE
          * and adds accountId and accountName before Salesforce signs the request.
          */
         const recordId = component.get("v.recordId") || "";

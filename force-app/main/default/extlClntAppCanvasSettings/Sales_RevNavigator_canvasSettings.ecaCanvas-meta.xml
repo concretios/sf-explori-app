@@ -5,6 +5,6 @@
     <canvasUrl>https://si.staging.explori.com/</canvasUrl>
     <externalClientApplication>Sales_RevNavigator</externalClientApplication>
     <label>Explori Sales RevNavigator Settings</label>
-    <lifeCycleHandler>CanvasLifecycleHandlerPost</lifeCycleHandler>
+    <lifeCycleHandler>SalesRevNavigatorCanvasLifecycleHandler</lifeCycleHandler>
     <samlInitiationMethod>None</samlInitiationMethod>
 </ExtlClntAppCanvasSettings>

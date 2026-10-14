@@ -1,3 +1,3 @@
 <aura:documentation>
-    <aura:description>Passes { recordId } to the canvas app; the CanvasLifecycleHandlerPost lifecycle handler adds accountId and accountName to the signed request.</aura:description>
+    <aura:description>Passes { recordId } to the canvas app; the SalesRevNavigatorCanvasLifecycleHandler lifecycle handler adds accountId and accountName to the signed request.</aura:description>
 </aura:documentation>
