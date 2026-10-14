@@ -2,9 +2,8 @@
 <ExtlClntAppCanvasSettings xmlns="http://soap.sforce.com/2006/04/metadata">
     <accessMethod>Post</accessMethod>
     <canvasLocationOptions>Aura</canvasLocationOptions>
-    <canvasUrl>https://si.staging.explori.com/</canvasUrl>
-    <externalClientApplication>Sales_RevNavigator</externalClientApplication>
-    <label>Explori Sales RevNavigator Settings</label>
-    <lifeCycleHandler>SalesRevNavigatorCanvasLifecycleHandler</lifeCycleHandler>
+    <canvasUrl>https://gateway.staging.explori.com/salesIntelligence/salesforceAuth</canvasUrl>
+    <externalClientApplication>Explori_Sales_RevNavigator</externalClientApplication>
+    <label>Explori_Sales_RevNavigator_canvasSettings</label>
     <samlInitiationMethod>None</samlInitiationMethod>
 </ExtlClntAppCanvasSettings>
