@@ -2,11 +2,13 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "default": true
+      "default": true,
+      "package": "Explori Sales RevNavigator",
+      "versionDescription": "Brings Explori's RevNavigator dashboard inside Salesforce."
     }
   ],
-  "name": "explori",
-  "namespace": "",
+  "name": "ExploriRevNav",
+  "namespace": "ExploriRevNav",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "67.0"
 }
