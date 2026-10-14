@@ -5,5 +5,6 @@
     <canvasUrl>https://gateway.staging.explori.com/salesIntelligence/salesforceAuth</canvasUrl>
     <externalClientApplication>Explori_Sales_RevNavigator</externalClientApplication>
     <label>Explori_Sales_RevNavigator_canvasSettings</label>
+    <lifeCycleHandler>SalesRevNavigatorCanvasLifecycleHandler</lifeCycleHandler>
     <samlInitiationMethod>None</samlInitiationMethod>
 </ExtlClntAppCanvasSettings>
